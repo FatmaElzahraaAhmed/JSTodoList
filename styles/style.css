@@ -47,11 +47,11 @@ div {
   outline: #cecece solid 1px;
   border-radius: 5px;
   background-color: #ffffff;
+  overflow-y: auto;
 }
 .no-border {
-    outline: none;
-  }
-  
+  outline: none;
+}
 
 .task {
   display: flex;
@@ -67,9 +67,8 @@ div {
 }
 
 .task.done-task {
-    background-color: rgba(0, 128, 0, 0.171);
-  }
-  
+  background-color: rgba(0, 128, 0, 0.171);
+}
 
 .task .right {
   display: flex;
@@ -113,38 +112,38 @@ div {
   width: 100%;
 }
 
-.border{
-    border-bottom: #cecece 1px solid;
-    margin: 40px 0px 40px 0px;
-    display: none;
+.border {
+  border-bottom: #cecece 1px solid;
+  margin: 40px 0px 40px 0px;
+  display: none;
 }
 
 .add {
-    width: 60%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.add .task-name{
-    border: #cecece 1px solid;
-    border-radius: 4px;
-    padding: 7px 12px 7px 12px;
+.add .task-name {
+  border: #cecece 1px solid;
+  border-radius: 4px;
+  padding: 7px 12px 7px 12px;
 }
 
-.add .add-button{
-    border: #cecece;
-    background-color: #337ab7;
-    color: white;
-    padding: 7px 12px 7px 12px;
-    border-radius: 3px;
-    box-shadow: #cecece 2px 2px 3px;
-    position: relative;
-    bottom: 0;
-    cursor: pointer;
+.add .add-button {
+  border: #cecece;
+  background-color: #337ab7;
+  color: white;
+  padding: 7px 12px 7px 12px;
+  border-radius: 3px;
+  box-shadow: #cecece 2px 2px 3px;
+  position: relative;
+  bottom: 0;
+  cursor: pointer;
 }
 
-.add .add-button:hover{
-    bottom: 1px;
-    filter: brightness(105%);
+.add .add-button:hover {
+  bottom: 1px;
+  filter: brightness(105%);
 }
