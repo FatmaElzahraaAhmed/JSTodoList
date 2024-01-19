@@ -36,7 +36,6 @@ div {
   max-height: 500px;
   border-radius: 7px;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.122);
-  overflow-y: auto;
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -47,7 +46,8 @@ div {
   outline: #cecece solid 1px;
   border-radius: 5px;
   background-color: #ffffff;
-  overflow-y: auto;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
 }
 .no-border {
     outline: none;
