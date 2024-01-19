@@ -47,6 +47,7 @@ div {
   outline: #cecece solid 1px;
   border-radius: 5px;
   background-color: #ffffff;
+  overflow-y: auto;
 }
 .no-border {
     outline: none;
