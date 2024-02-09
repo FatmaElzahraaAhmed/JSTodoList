@@ -3,37 +3,44 @@ document.addEventListener("DOMContentLoaded", function () {
   const taskInput = document.querySelector(".task-name");
   const tasksContainer = document.querySelector(".tasks");
 
+  loadTasksFromLocalStorage();
+
   addBtn.addEventListener("click", addTask);
 
   function addTask() {
     const taskName = taskInput.value.trim();
-  
+
     if (taskName !== "") {
       const newTask = createTaskElement(taskName);
       tasksContainer.appendChild(newTask);
+
+      saveTaskToLocalStorage(taskName, false);
+
       taskInput.value = "";
       updateTaskSectionBorder();
     }
   }
-  
+
   function deleteTask(event) {
     const taskDiv = event.target.closest(".task");
+    const taskName = taskDiv.querySelector(".left").textContent;
+
+    removeTaskFromLocalStorage(taskName);
+
     taskDiv.remove();
     updateTaskSectionBorder();
   }
-  
+
   function updateTaskSectionBorder() {
     const taskDivs = document.querySelectorAll(".task");
     const tasksContainer = document.querySelector(".tasks");
     const borderDiv = document.querySelector(".border");
-    
+
     borderDiv.style.display = taskDivs.length > 0 ? "block" : "none";
     tasksContainer.classList.toggle("no-border", taskDivs.length === 0);
   }
-  
-  
 
-  function createTaskElement(taskName) {
+  function createTaskElement(taskName, isDone) {
     const taskDiv = document.createElement("div");
     taskDiv.className = "task";
 
@@ -60,6 +67,12 @@ document.addEventListener("DOMContentLoaded", function () {
     taskDiv.appendChild(leftDiv);
     taskDiv.appendChild(rightDiv);
 
+    if (isDone) {
+      taskDiv.classList.add("done-task");
+      doneBtn.style.display = "none";
+      taskDiv.style.backgroundColor = "rgba(0, 128, 0, 0.171)";
+    }
+
     return taskDiv;
   }
 
@@ -68,7 +81,11 @@ document.addEventListener("DOMContentLoaded", function () {
     taskDiv.classList.toggle("done-task");
 
     const doneBtn = taskDiv.querySelector(".done");
-    doneBtn.style.display = "none"; 
+    doneBtn.style.display = "none";
+
+    const taskName = taskDiv.querySelector(".left").textContent;
+
+    saveTaskToLocalStorage(taskName, taskDiv.classList.contains("done-task"));
 
     if (taskDiv.classList.contains("done-task")) {
       taskDiv.style.backgroundColor = "rgba(0, 128, 0, 0.171)";
@@ -78,5 +95,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  
+  function loadTasksFromLocalStorage() {
+    for (let i = 0; i < localStorage.length; i++) {
+      const taskName = localStorage.key(i);
+      const isDone = JSON.parse(localStorage.getItem(taskName));
+      const newTask = createTaskElement(taskName, isDone);
+      tasksContainer.appendChild(newTask);
+    }
+    updateTaskSectionBorder();
+  }
+
+  function saveTaskToLocalStorage(taskName, isDone) {
+    localStorage.setItem(taskName, JSON.stringify(isDone));
+  }
+
+  function removeTaskFromLocalStorage(taskName) {
+    localStorage.removeItem(taskName);
+  }
 });
